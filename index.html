@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Story Stacks · Movie, TV & Book Journal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">Story Stacks</p>
+        <h1>Log every movie, show, and book in one cozy space.</h1>
+        <p class="lead">
+          Capture your reactions, rate what you watch or read, and build a personal
+          archive that’s easy to browse later.
+        </p>
+      </div>
+      <div class="hero__stats">
+        <div class="stat">
+          <p class="stat__label">Total entries</p>
+          <p class="stat__value" id="statTotal">0</p>
+        </div>
+        <div class="stat">
+          <p class="stat__label">Movies & TV</p>
+          <p class="stat__value" id="statScreen">0</p>
+        </div>
+        <div class="stat">
+          <p class="stat__label">Books</p>
+          <p class="stat__value" id="statBooks">0</p>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <div class="panel__header">
+          <h2>Add a new entry</h2>
+          <p>Fill anything you like—only the title and type are required.</p>
+        </div>
+        <form id="entryForm" class="form-grid">
+          <label class="field">
+            <span>Category</span>
+            <div class="pill-toggle">
+              <input type="radio" name="category" value="movie" id="catMovie" checked />
+              <label for="catMovie">Movie</label>
+              <input type="radio" name="category" value="tv" id="catTV" />
+              <label for="catTV">TV Show</label>
+              <input type="radio" name="category" value="book" id="catBook" />
+              <label for="catBook">Book</label>
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Title</span>
+            <input type="text" name="title" placeholder="Dune, Season 3..." required />
+          </label>
+
+          <label class="field">
+            <span>Creator / Author</span>
+            <input type="text" name="creator" placeholder="Director, showrunner, author" />
+          </label>
+
+          <label class="field">
+            <span>Date finished</span>
+            <input type="date" name="dateFinished" />
+          </label>
+
+          <label class="field rating-field">
+            <span>Rating</span>
+            <div class="rating">
+              <input type="range" min="0" max="5" step="0.5" value="4" name="rating" />
+              <output>4</output>
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Format</span>
+            <select name="format">
+              <option value="theater">Theater</option>
+              <option value="streaming">Streaming</option>
+              <option value="physical">Physical copy</option>
+              <option value="audio">Audiobook / Podcast</option>
+              <option value="other" selected>Other</option>
+            </select>
+          </label>
+
+          <label class="field full">
+            <span>Quick thoughts</span>
+            <textarea
+              name="thoughts"
+              placeholder="Three sentences about how it made you feel..."
+              rows="4"
+            ></textarea>
+          </label>
+
+          <label class="field full">
+            <span>Memorable moments</span>
+            <textarea
+              name="highlights"
+              placeholder="Favorite quotes, standout scenes, character arcs..."
+              rows="3"
+            ></textarea>
+          </label>
+
+          <button type="submit" class="primary">Save entry</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel__header">
+          <h2>Your archive</h2>
+          <p>Search, filter, and relive what you’ve enjoyed.</p>
+        </div>
+        <div class="filters">
+          <label>
+            <span>Show</span>
+            <select id="filterCategory">
+              <option value="all" selected>Everything</option>
+              <option value="movie">Movies</option>
+              <option value="tv">TV</option>
+              <option value="book">Books</option>
+            </select>
+          </label>
+          <label>
+            <span>Year</span>
+            <select id="filterYear">
+              <option value="all" selected>Any year</option>
+            </select>
+          </label>
+          <label class="full-width">
+            <span>Search</span>
+            <input id="filterSearch" type="search" placeholder="Title, creator, thoughts" />
+          </label>
+        </div>
+        <div id="entriesList" class="entries"></div>
+      </section>
+    </main>
+
+    <template id="entryTemplate">
+      <article class="entry-card">
+        <header>
+          <div>
+            <p class="entry-category"></p>
+            <h3 class="entry-title"></h3>
+          </div>
+          <div class="entry-meta">
+            <span class="entry-rating"></span>
+            <time class="entry-date"></time>
+          </div>
+        </header>
+        <dl class="entry-details"></dl>
+        <p class="entry-thoughts"></p>
+        <p class="entry-highlights"></p>
+        <footer>
+          <button class="ghost pin-toggle" type="button"></button>
+          <button class="ghost delete-entry" type="button">Delete</button>
+        </footer>
+      </article>
+    </template>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
+
